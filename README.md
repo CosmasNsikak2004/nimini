@@ -1,142 +1,107 @@
 # NIMINI CO. — Medical Supplies & Healthcare Distribution
 
-A pixel-exact React + TypeScript + Vite port of the NIMINI CO. static website. Re-engineered using clean, modular React components, React state, and custom hooks while maintaining every original visual detail, media query, color value, and layout constraint.
+A responsive web application for NIMINI CO., a medical supplies and healthcare distribution company based in Houston, Texas. Built with React, TypeScript and Vite, with an AI customer assistant ("Nimi") powered by the Google Gemini API through a secure server-side endpoint.
 
-## Features Replicated in React
+## Features
 
-1. **Top Bar**: Call line (+1 (346) 664-8018) and quick-action "VIEW PRODUCTS" button smooth-scrolling to the catalog.
-2. **Navbar**:
-   - Fixed header with brand icon and typography.
-   - Smooth-scrolling anchor links for all sections (`#home`, `#about`, `#services`, `#product`, `#contact`).
-   - Sticky / scrolled transition state (`.home.active`) triggered dynamically as the user scrolls.
-   - Fully interactive mobile slide-down menu with animated hamburger-to-close (`fa-bars-staggered` <-> `fa-xmark`) toggle and auto-close upon navigation.
-3. **Hero**:
-   - Vertical social rail (Instagram, X/Twitter, WhatsApp).
-   - Headline "Bringing Smiles Back to Health" with primary and secondary copy.
-   - "REQUEST SUPPLIES" action that opens the modal.
-   - 3-image responsive grid with Animate.css `fadeInRight` entrance.
-4. **Services**:
-   - Heading with 6 comprehensive service cards (Convenient Ordering, Customisation & Drop-Shipping, Superior Support, Emergency Supply Requests, Order Tracking, Procurement Consultation).
-   - Responsive flex grid with gradient icon badges, hover lifts, and smooth scroll links.
-5. **About**:
-   - Company background story and origin as a long-term care pharmacy.
-   - 3-image gallery grid.
-   - Stat counters: 500+ Facilities Served, 10+ Years Experience, 99% On-Time Delivery.
-6. **Testimonials**:
-   - Responsive carousel with loop, autoplay (6s interval), and pause on hover.
-   - Prev/Next navigation arrows with Font Awesome glyphs.
-   - Responsive items-per-view (1 on mobile/tablet, 2 on desktop) matching Owl Carousel behavior via native React state.
-7. **Banner**:
-   - Full-width quote / mission statement with CEO attribution and fixed parallax background.
-8. **Products**:
-   - 3D rotating carousel (`transform-style: preserve-3d`) with 8 product images on desktop.
-   - Optimized mobile product grid with touch-friendly cards.
-   - "REQUEST A PRODUCT" modal trigger.
-9. **Contact**:
-   - Interactive contact form with validation and animated success confirmation state.
-   - Google Maps iframe embed centered on Texas, USA.
-   - 4 contact info boxes (Phone, Address, Email, Hours).
-10. **Footer**:
-    - Company mission summary.
-    - Specialties list, quick links with chevron icons, social links, and emergency line.
-    - Copyright and legal credits bar.
-11. **Floating WhatsApp Button**:
-    - Persistent bottom-right WhatsApp action with hover tooltip.
-12. **Page Loader**:
-    - Full-screen animated SVG path drawing and logo entrance displayed on initial page load (~1.5s).
-13. **Supply Request Modal**:
-    - Triggered from Hero, Products, and Footer.
-    - Backdrop overlay click-to-close and ESC support.
-    - Controlled form inputs, submit feedback state, and automatic reset.
+- **Page loader**: animated SVG logo shown on first load (~1.5 s).
+- **Top bar and navigation**: click-to-call line, "View Products" shortcut, sticky header that changes style on scroll, smooth-scroll links and an animated mobile menu.
+- **Hero**: headline, social links, image grid and a "Request Supplies" call to action.
+- **Services**: six service cards (ordering, drop-shipping, support, emergency requests, order tracking, procurement consultation).
+- **About**: company story and key statistics (500+ facilities, 10+ years, 99% on-time delivery).
+- **Testimonials**: auto-playing carousel (pauses on hover; 1 or 2 slides per view depending on screen width).
+- **Products**: 3D rotating catalogue on desktop and a touch-friendly grid on mobile.
+- **Supply request modal**: validated form opened from the hero, products and footer sections.
+- **Contact**: validated contact form, embedded map and contact details.
+- **Floating WhatsApp button** for quick contact.
+- **Nimi AI assistant**: floating chat widget with suggested questions, typing indicator, session-persisted history and a direct-contact fallback if the AI is unavailable.
 
 ## Tech Stack
 
-- **Framework**: React 19 + TypeScript
-- **Bundler**: Vite
-- **Styling**: Ported vanilla CSS with exact custom properties, CSS variables, and all 11 original breakpoints:
-  `1480px`, `1300px`, `1200px`, `1150px`, `1100px`, `1050px`, `992px`, `850px`, `768px`, `576px`, `574px`.
-- **Typography**: Google Fonts (DM Serif Display, Michroma, Signika)
-- **Icons**: Font Awesome 6.4.2
+| Area | Technology |
+| --- | --- |
+| UI | React 19, TypeScript |
+| Build tool | Vite |
+| Styling | Custom CSS with responsive breakpoints (Tailwind CSS is installed) |
+| Animation | Animate.css, CSS transitions, custom `useAOS` scroll-reveal hook |
+| Icons / fonts | Font Awesome, Google Fonts |
+| Server | Node.js, Express |
+| AI | Google Gemini via `@google/genai` |
+| Hosting | Vercel (serverless) or any Node host |
 
 ## Project Structure
 
 ```text
-├── public/
-│   └── assets/             # Original image assets and phone-call.svg
-├── src/
-│   ├── components/
-│   │   ├── About.tsx
-│   │   ├── Banner.tsx
-│   │   ├── Contact.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Hero.tsx
-│   │   ├── Loader.tsx
-│   │   ├── Navbar.tsx
-│   │   ├── Products.tsx
-│   │   ├── Services.tsx
-│   │   ├── SupplyModal.tsx
-│   │   ├── Testimonials.tsx
-│   │   ├── TopBar.tsx
-│   │   ├── ChatWidget.tsx
-│   │   └── WhatsAppFloat.tsx
-│   ├── data/
-│   │   ├── content.ts      # Business grounding data & prompt builder
-│   │   └── siteData.ts     # Content data (nav, services, testimonials, products)
-│   ├── hooks/
-│   │   └── useAOS.ts       # IntersectionObserver scroll animation hook
-│   ├── App.tsx             # Root page layout and shared state
-│   ├── index.css           # Global stylesheet ported from style.css
-│   └── main.tsx            # React application entry
 ├── api/
-│   └── chat.ts             # Serverless API endpoint for Gemini chat (/api/chat)
-├── server.ts               # Full-stack Express server with Vite dev middleware
-├── vercel.json             # Vercel serverless deployment config
-├── index.html              # HTML shell with Google Fonts & Font Awesome
+│   └── chat.ts             # /api/chat endpoint (Express and Vercel compatible)
+├── public/
+│   └── assets/             # Images and icons
+├── src/
+│   ├── components/         # About, Banner, ChatWidget, Contact, Footer, Hero, Loader,
+│   │                       # Navbar, Products, Services, SupplyModal, Testimonials,
+│   │                       # TopBar, WhatsAppFloat
+│   ├── data/
+│   │   ├── siteData.ts     # Typed site content (nav, services, products, testimonials, contact)
+│   │   └── content.ts      # Company profile and chatbot system-prompt builder
+│   ├── hooks/
+│   │   └── useAOS.ts       # IntersectionObserver scroll-animation hook
+│   ├── App.tsx             # Page layout and shared state
+│   ├── index.css           # Global styles
+│   └── main.tsx            # Entry point
+├── server.ts               # Express server (serves the API; Vite middleware in development)
+├── vercel.json             # Vercel rewrites
+├── index.html              # HTML shell, SEO and social-sharing meta tags
 └── package.json
 ```
 
-## AI Chatbot & Backend Setup
+## AI Assistant
 
-### Environment Variables
-Create a `.env` file in the project root:
-```env
-GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
-PORT=3000
-```
+The chat widget sends the conversation to `POST /api/chat`. The server:
 
-- **Local Development**: Add your key to `.env`. It is loaded securely via `dotenv` in `server.ts` and never exposed to the client.
-- **Production (Vercel)**: Add `GEMINI_API_KEY` under **Project Settings > Environment Variables**.
-- **Production (Cloud Run / AI Studio)**: Configure `GEMINI_API_KEY` in the **Settings > Secrets** panel or container environment configuration.
+1. applies a per-IP rate limit (20 requests per minute),
+2. validates the messages (non-empty, last 20 kept, latest message at most 2,000 characters),
+3. builds a system prompt from the same business data that renders the site,
+4. calls Gemini (one retry on temporary errors), and
+5. cleans the reply and returns `{ reply }`.
 
-### Model & SDK Details
-- **SDK**: Official `@google/genai` (`^2.4.0`)
-- **Model**: `gemini-3.8-flash`
-  - Selected according to the latest Google GenAI guidelines as the recommended model for real-time text and conversation tasks.
-  - Delivers fast response times, strong instruction adherence, and grounded reasoning on business constraints without hallucination.
+The assistant is restricted to NIMINI CO. topics, does not give medical advice and does not invent prices or stock levels. The API key stays on the server and is never sent to the browser.
 
-### Running Locally
+| Method | Path | Purpose |
+| --- | --- | --- |
+| POST | `/api/chat` | Send `{ messages: [{ role, content }] }`, receive `{ reply }` |
+| GET | `/api/health` | Health check |
+
+## Getting Started
+
+**Prerequisites:** Node.js (LTS) and a Gemini API key from Google AI Studio.
+
 1. Install dependencies:
    ```bash
    npm install
    ```
-
-2. Start the full-stack dev server:
+2. Create a `.env` file in the project root:
+   ```env
+   GEMINI_API_KEY="your-gemini-api-key"
+   PORT=3000
+   ```
+3. Start the development server (Express + Vite):
    ```bash
    npm run dev
    ```
-   This executes `tsx server.ts`, which runs the Express server on port 3000 with the `/api/chat` route and Vite's development middleware.
+   Open <http://localhost:3000>.
 
-   Alternatively, if testing with the Vercel CLI:
-   ```bash
-   vercel dev
-   ```
+### Scripts
 
-3. Build for production:
-   ```bash
-   npm run build
-   ```
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the full-stack development server |
+| `npm run build` | Create a production build in `dist/` |
+| `npm start` | Start the server (serves `dist/` when `NODE_ENV=production`) |
+| `npm run lint` | Type-check with TypeScript |
 
-4. Start in production mode:
-   ```bash
-   npm start
-   ```
+## Deployment
+
+- **Vercel:** import the repository, add `GEMINI_API_KEY` under Project Settings > Environment Variables, and deploy. `vercel.json` routes `/api/*` to the serverless function and everything else to `index.html`.
+- **Node host / Cloud Run:** run `npm run build`, set `NODE_ENV=production` and `GEMINI_API_KEY`, then `npm start`.
+
+Never commit your `.env` file.
