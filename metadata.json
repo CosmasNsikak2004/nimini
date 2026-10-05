@@ -1,0 +1,6 @@
+{
+  "name": "NIMINI CO. Medical Supplies & Healthcare Distribution",
+  "description": "Premium medical supplies and healthcare equipment distributor serving hospitals, clinics, and care facilities nationwide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
