@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
-import { buildNiminioSystemPrompt } from '../src/data/content';
+import { buildNiminioSystemPrompt } from '../src/data/content.js';
 
 // Simple in-memory rate limiter per IP address
 interface RateLimitRecord {

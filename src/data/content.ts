@@ -1,12 +1,5 @@
-export * from './siteData';
-import {
-  siteConfig,
-  servicesData,
-  productsData,
-  contactInfoData,
-  statsData,
-  specialtiesList,
-} from './siteData';
+export * from './siteData.js';
+import { siteConfig, servicesData, productsData, contactInfoData, statsData, specialtiesList } from './siteData.js';
 
 export const companyBio = {
   name: siteConfig.companyName,
